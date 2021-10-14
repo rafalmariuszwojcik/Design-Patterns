@@ -12,7 +12,11 @@ namespace DesignPatternsTests
         [Test]
         public void AAA() 
         {
-            EMail eMail = EMail.New().From("rw@soloplan.de").To("it@soloplan.de").Content("AAAAA");
+            EMail eMail = EMail.New()
+                .From("rw@soloplan.de")
+                .To("it@soloplan.de")
+                .Content("AAAAA");
+
             Assert.AreEqual("rw@soloplan.de", eMail.From);
             Assert.AreEqual("it@soloplan.de", eMail.To);
             Assert.AreEqual("AAAAA", eMail.Content);
