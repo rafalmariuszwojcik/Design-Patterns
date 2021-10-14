@@ -12,13 +12,11 @@ namespace DesignPatterns.Builder
         public string To { get; private set; }
         public string Content { get; private set; }
 
-        protected EMail() 
+        private EMail() 
         { 
         }
 
         public static EMailBuilder New() => new EMailBuilder(new EMail());
-
-
 
         public class EMailBuilder
         {
@@ -52,7 +50,5 @@ namespace DesignPatterns.Builder
                 return builder.eMail;
             }
         }
-
-
     }
 }
