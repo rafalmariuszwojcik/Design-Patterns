@@ -8,9 +8,9 @@ namespace DesignPatterns.Builder
 {
     public class EMail
     {
-        public string From { get; set; }
-        public string To { get; set; }
-        public string Content { get; set; }
+        public string From { get; private set; }
+        public string To { get; private set; }
+        public string Content { get; private set; }
 
         protected EMail() 
         { 
@@ -18,6 +18,41 @@ namespace DesignPatterns.Builder
 
         public static EMailBuilder New() => new EMailBuilder(new EMail());
 
-        
+
+
+        public class EMailBuilder
+        {
+            private readonly EMail eMail;
+
+            public EMailBuilder(EMail eMail)
+            {
+                this.eMail = eMail;
+            }
+
+            public EMailBuilder From(string from)
+            {
+                this.eMail.From = from;
+                return this;
+            }
+
+            public EMailBuilder To(string to)
+            {
+                this.eMail.To = to;
+                return this;
+            }
+
+            public EMailBuilder Content(string content)
+            {
+                this.eMail.Content = content;
+                return this;
+            }
+
+            public static implicit operator EMail(EMailBuilder builder)
+            {
+                return builder.eMail;
+            }
+        }
+
+
     }
 }

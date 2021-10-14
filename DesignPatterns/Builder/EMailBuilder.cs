@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DesignPatterns.Builder
 {
+    /*
     public class EMailBuilder
     {
         private readonly EMail eMail;
@@ -32,10 +33,11 @@ namespace DesignPatterns.Builder
             this.eMail.Content = content;
             return this;
         }
-
+        
         public static implicit operator EMail(EMailBuilder builder) 
         { 
             return builder.eMail;
         }
     }
+    */
 }
