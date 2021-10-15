@@ -11,6 +11,8 @@ namespace DesignPatterns.Builder
         public string From { get; private set; }
         public string To { get; private set; }
         public string Content { get; private set; }
+        public string Cc { get; private set; }
+        public string Bcc { get; private set; }
 
         private EMail() 
         { 
@@ -20,7 +22,9 @@ namespace DesignPatterns.Builder
 
         public class EMailBuilder
         {
-            private readonly EMail eMail;
+            private EMailAdditionalRecipientsBuilder eMailAdditionalRecipientsBuilder;
+
+            protected readonly EMail eMail;
 
             public EMailBuilder(EMail eMail)
             {
@@ -45,9 +49,42 @@ namespace DesignPatterns.Builder
                 return this;
             }
 
+            public EMailAdditionalRecipientsBuilder AdditionalRecipients
+            {
+                get 
+                {
+                    if (eMailAdditionalRecipientsBuilder == null) 
+                    {
+                        eMailAdditionalRecipientsBuilder = new EMailAdditionalRecipientsBuilder(eMail);
+                    }
+                    
+                    return eMailAdditionalRecipientsBuilder;
+                }
+            }
+
             public static implicit operator EMail(EMailBuilder builder)
             {
                 return builder.eMail;
+            }
+        }
+
+        public class EMailAdditionalRecipientsBuilder : EMailBuilder
+        {
+            public EMailAdditionalRecipientsBuilder(EMail eMail)
+                : base(eMail)
+            {
+            }
+
+            public EMailAdditionalRecipientsBuilder Cc(string cc) 
+            {
+                this.eMail.Cc = cc;
+                return this;
+            }
+
+            public EMailAdditionalRecipientsBuilder Bcc(string bcc)
+            {
+                this.eMail.Bcc = bcc;
+                return this;
             }
         }
     }
